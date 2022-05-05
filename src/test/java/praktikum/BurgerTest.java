@@ -22,6 +22,7 @@ public class BurgerTest {
     private static final float INGREDIENT_PRICE = 50;
     private static final String SECOND_INGREDIENT_NAME = "sausage Every day";
     private static final float SECOND_INGREDIENT_PRICE = 100;
+    Burger burger;   //общая переменная класса
 
     @Before
     public void setUp() {
@@ -33,25 +34,23 @@ public class BurgerTest {
         Mockito.when(second_ingredient.getName()).thenReturn(SECOND_INGREDIENT_NAME);
         Mockito.when(second_ingredient.getPrice()).thenReturn(SECOND_INGREDIENT_PRICE);
         Mockito.when(second_ingredient.getType()).thenReturn(FILLING);
+        burger = new Burger();
     }
 
     @Test
     public void shouldSetBuns() {
-        Burger burger = new Burger();
         burger.setBuns(bun);
         assertEquals(bun, burger.bun);
     }
 
     @Test
     public void shouldAddIngredient() {
-        Burger burger = new Burger();
         burger.addIngredient(ingredient);
         assertTrue(burger.ingredients.contains(ingredient));
     }
 
     @Test
     public void shouldRemoveIngredient() {
-        Burger burger = new Burger();
         burger.ingredients.add(ingredient);
         burger.removeIngredient(0);
         assertFalse(burger.ingredients.contains(ingredient));
@@ -59,7 +58,6 @@ public class BurgerTest {
 
     @Test
     public void shouldMoveIngredient() {
-        Burger burger = new Burger();
         int positionBefore = 2;
         int positionAfter = 4;
         for (int i = 0; i <= 5; i++) {
@@ -72,7 +70,6 @@ public class BurgerTest {
 
     @Test
     public void shouldGetPrice() {
-        Burger burger = new Burger();
         burger.setBuns(bun);
         burger.ingredients.add(ingredient);
         burger.ingredients.add(second_ingredient);
@@ -82,7 +79,6 @@ public class BurgerTest {
 
     @Test
     public void shouldGetReceipt() {
-        Burger burger = new Burger();
         burger.setBuns(bun);
         burger.ingredients.add(ingredient);
         burger.ingredients.add(second_ingredient);

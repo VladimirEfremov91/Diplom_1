@@ -22,18 +22,22 @@ public class BunTest {
     @Parameterized.Parameters
     public static Object[][] getTestData() {
         return new Object[][] {
-                {faker.lorem().fixedString(1), 100},
-                {faker.lorem().fixedString(100), 100},
-                {faker.lorem().fixedString(50), Float.MIN_NORMAL},
-                {faker.lorem().fixedString(50), Float.MAX_VALUE},
+                //немножко по-другому сделал генерацию тестового названия бургера
+                {faker.lorem().characters(1,true, false), 100},     //тут название булочки всегда из буквы
+                {faker.number().digits(1), 100},                                                        // на всякий случай вариант с одной цифрой в названии
+                {faker.lorem().characters(100,true, true), 100},
+                {faker.lorem().characters(50,true, true), Float.MIN_NORMAL},
+                {faker.lorem().characters(50,true, true), Float.MAX_VALUE},
                 {null, 100},
                 {"", 100},
-                {faker.lorem().fixedString(50), 0},
+                {faker.lorem().characters(50,true, true), 0},
+                {faker.lorem().characters(50,true, true), -10},             //кейсы с отрицательным числом
+                {faker.lorem().characters(50,true, true), Float.MIN_VALUE},
         };
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         bun = new Bun(name, price);
     }
 

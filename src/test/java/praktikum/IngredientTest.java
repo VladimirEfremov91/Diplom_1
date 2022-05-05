@@ -9,7 +9,7 @@ import static praktikum.IngredientType.*;
 @RunWith(Parameterized.class)
 public class IngredientTest {
     static Faker faker = new Faker();
-    private IngredientType ingredientType;
+    private final IngredientType ingredientType;
     private final String name;
     private final float price;
 
@@ -23,13 +23,16 @@ public class IngredientTest {
     @Parameterized.Parameters
     public static Object[][] getTestData() {
         return new Object[][] {
-                {SAUCE, faker.lorem().fixedString(1), 100 },
-                {FILLING, faker.lorem().fixedString(100), 100 },
-                {SAUCE, faker.lorem().fixedString(50), Float.MIN_NORMAL},
-                {FILLING, faker.lorem().fixedString(50), Float.MAX_VALUE},
-                {SAUCE, null, 100},
-                {FILLING, "", 100},
-                {SAUCE, faker.lorem().fixedString(50), 0},
+                {SAUCE, faker.lorem().characters(1,true, false), 100},
+                {FILLING, faker.number().digits(1), 100},
+                {SAUCE, faker.lorem().characters(100,true, true), 100},
+                {FILLING, faker.lorem().characters(50,true, true), Float.MIN_NORMAL},
+                {SAUCE, faker.lorem().characters(50,true, true), Float.MAX_VALUE},
+                {FILLING, null, 100},
+                {SAUCE, "", 100},
+                {FILLING, faker.lorem().characters(50,true, true), 0},
+                {SAUCE, faker.lorem().characters(50,true, true), -10},
+                {FILLING, faker.lorem().characters(50,true, true), Float.MIN_VALUE},
         };
     }
 
